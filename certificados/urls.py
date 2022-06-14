@@ -15,8 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
+import os
 
 urlpatterns = [
     path('validacion/', include('validacion.urls')),
     path('admin/', admin.site.urls),
 ]
+
+certs = os.path.join(settings.BASE_DIR, 'raiz/CA/intermedio/certs/')
+
+urlpatterns += static('media/', document_root=certs)
